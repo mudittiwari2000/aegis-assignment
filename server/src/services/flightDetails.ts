@@ -2,8 +2,6 @@ import { FlightPriceResponse, FlightVendor } from '../lib/types/flight';
 import { IFlightDetails, FlightDetails } from '../models/flightDetails';
 import { formatCurrency } from '../utils/formatCurrency';
 
-const cache: Map<string, any> = new Map();
-
 export class FlightDetailsService {
   static async getAllFlightDetails(): Promise<IFlightDetails[]> {
     return FlightDetails.find().exec();
