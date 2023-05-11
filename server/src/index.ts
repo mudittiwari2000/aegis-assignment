@@ -1,14 +1,16 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 import flightPriceRoutes from './routes/flightDetails';
+
+dotenv.config();
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-const mongoUri =
-  'mongodb+srv://mudittiwari2000:Mudyeet2809@cluster0.bvza6e7.mongodb.net/?retryWrites=true&w=majority';
+const mongoUri = process.env.MONGODB_URI || '';
 
 connectDB().catch((err) => console.log(err));
 

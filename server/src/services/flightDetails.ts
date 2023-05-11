@@ -10,8 +10,18 @@ export class FlightDetailsService {
   static async createFlightDetails(
     flightDetails: IFlightDetails
   ): Promise<IFlightDetails> {
-    const newFlightDetails = new FlightDetails(flightDetails);
-    return newFlightDetails.save();
+    const existingFlight = await FlightDetails.findOneAndUpdate(
+      {
+        source: flightDetails.source,
+        destination: flightDetails.destination,
+        vendor: flightDetails.vendor,
+        date: flightDetails.date
+      },
+      { price: flightDetails.price },
+      { new: true, upsert: true, setDefaultsOnInsert: true }
+    );
+
+    return existingFlight;
   }
 
   static async getFlightDetails(
